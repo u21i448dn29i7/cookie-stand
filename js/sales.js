@@ -41,17 +41,17 @@ function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, av
     newRow.id = this.storeLocation;
 
     var newRow1Cell0 = newRow.insertCell(0);
-    newRow1Cell0.innerHTML = this.storeLocation;
+    newRow1Cell0.appendChild(document.createTextNode(this.storeLocation));
 
     for (var r = 0; r < hoursOfOperations.length; r++) {
       cell = newRow.insertCell(r + 1);
-      cell.innerHTML = this.cookieSalesForecast[r][1];
+      cell.appendChild(document.createTextNode(this.cookieSalesForecast[r][1]));
     }
 
     cell = newRow.insertCell(hoursOfOperations.length + 1);
-    cell.innerHTML = this.totalDailySales;
-
+    cell.appendChild(document.createTextNode(this.totalDailySales));
   };
+
 }
 
 
@@ -77,17 +77,16 @@ var generateHeaderRow = function (salesForecastTableId) {
   var cell = 0;
 
   var headerRow = salesForecastTableId.insertRow(0);
-  var headerCell0 = headerRow.insertCell(0);
-  headerCell0.innerHTML = '';
-
+  headerRow.insertCell(cell);  // inserts an empty cell
+ 
   for (var i = 0; i < hoursOfOperations.length; i++) {
     // "i + 1" begins in the second column of the table
     cell = headerRow.insertCell(i + 1);
-    cell.innerHTML = hoursOfOperations[i];
+    cell.appendChild(document.createTextNode(hoursOfOperations[i]));
   }
 
   var headerTotalCell = headerRow.insertCell(hoursOfOperations.length + 1);
-  headerTotalCell.innerHTML = 'Daily Location Total';
+  headerTotalCell.appendChild(document.createTextNode('Daily Location Total'));
 
 };
 
@@ -106,7 +105,7 @@ var generateFooterRow = function (storeList, salesForecastTableId) {
   newRow.id = 'Totals';
 
   var newRow1Cell0 = newRow.insertCell(0);
-  newRow1Cell0.innerHTML = 'Totals';
+  newRow1Cell0.appendChild(document.createTextNode('Totals'));
 
   for (var i = 0; i < hoursOfOperations.length; i++) {
     var totalOfAllStoresHourly = 0;
@@ -115,7 +114,8 @@ var generateFooterRow = function (storeList, salesForecastTableId) {
     }
 
     cell = newRow.insertCell(i + 1);
-    cell.innerHTML = totalOfAllStoresHourly;
+    cell.appendChild(document.createTextNode(totalOfAllStoresHourly));
+
   }
 
   var grandTotal = 0;
@@ -124,7 +124,7 @@ var generateFooterRow = function (storeList, salesForecastTableId) {
   }
 
   cell = newRow.insertCell(hoursOfOperations.length + 1);
-  cell.innerHTML = grandTotal;
+  cell.appendChild(document.createTextNode(grandTotal));
 
 };
 
