@@ -113,29 +113,23 @@ var storeNumber004 = {
   }
 };
 
-var stores = [storeNumber000,storeNumber001,storeNumber002,storeNumber003,storeNumber004];
+(function() {
 
-var refreshCookieSalesForecast = (function() {
-  for (var s = 0; stores.length; s ++) {
-    var ul = document.createElement('ul');
-    ul.setAttribute('id',('store' + s));
+  var stores = [storeNumber000,storeNumber001,storeNumber002,storeNumber003,storeNumber004];
+  var salesForecastListDivId = document.getElementById('salesForecastList');
 
-    document.getElementById('renderList').appendChild(ul);
-    productList.forEach(renderProductList);
+  for (var s = 0; s < stores.length; s++) {
+    stores[s].forecastCookieSales();
 
-        var li = document.createElement('li');
-        li.setAttribute('class','item');
-        ul.appendChild(li);
-        t = document.createTextNode(element);
-        li.innerHTML=li.innerHTML + element;
+    var ul = salesForecastListDivId.appendChild(document.createElement('ul'));
+    ul.appendChild(document.createTextNode(stores[s].storeLocation));
+    ul.setAttribute('id', stores[s].storeLocation);
 
-        var salesForecastListDivId = document.getElementById('salesForecastList');
-
-
-    var ulNode = salesForecastListDivId.createElement("ul");         
-    var textnode = document.createTextNode(stores[s].storeLocation);
-    ulNode.appendChild(textnode);
-    salesForecastListDivId.appendChild(ulNode);
+    for (var h = 0; h < hoursOfOperations.length; h++) {
+      var appendToUl = document.getElementById(stores[s].storeLocation);
+      var li = appendToUl.appendChild(document.createElement('li'));
+      li.appendChild(document.createTextNode(hoursOfOperations[h] + ': ' + stores[s].cookieSalesForecast[h][1] + ' cookies'));
+    }
   }
 }());
 
