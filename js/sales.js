@@ -3,13 +3,12 @@
 // hoursOfOperations are 6AM __to__ 8PM or 14 Hrs.
 var hoursOfOperations = ['6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM'];
 
-
 //////////////////////////////////////////////////////
 // Constructor for a new store object. 
 // new NewStore('string', 'string', num, num, num);
 //
-// (Really, I just wanted to write "num, num, num" 
-// SOMEWHERE for Salmon Cookies v2.0)
+// Really, I just wanted to write "num, num, num" 
+// SOMEWHERE in the Salmon Cookies v2.0 code.
 //
 function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale) {
 
