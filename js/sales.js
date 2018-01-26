@@ -3,199 +3,139 @@
 // hoursOfOperations are 6AM __to__ 8PM or 14 Hrs.
 var hoursOfOperations = ['6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM'];
 
-// future constructor
-var storeNumber000 = {
-  storeName: 'King',
-  storeLocation: '1st and Pike',
-  minSalesPerHour: 23,
-  maxSalesPerHour: 65,
-  avgCookiesPerSale: 6.3,
-  // storeGeo: ['lat','long'],
-  // numEmployees: 2,
-  // manager: 'Aero',
-  cookieSalesForecast: [],
-  totalDailySales: 0,
-  forecastCookieSales: function () {
-    // for (var i in hoursOfOperations) {
+//////////////////////////////////////////////////////
+// Constructor for a new store object. 
+// new NewStore('string', 'string', num, num, num);
+//
+// Really, I just wanted to write "num, num, num" 
+// SOMEWHERE in the Salmon Cookies v2.0 code.
+//
+function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale) {
+
+  this.storeName = storeName;
+  this.storeLocation = storeLocation;
+  this.minSalesPerHour = minSalesPerHour;
+  this.maxSalesPerHour = maxSalesPerHour;
+  this.avgCookiesPerSale = avgCookiesPerSale;
+  this.cookieSalesForecast = [];
+  this.totalDailySales = 0;
+
+  this.forecastCookieSales = function () {
     var estimatedSales;
     var cookieSalesForecastPerHour;
-    for (var i = 0; i < hoursOfOperations.length; i++ ) {
-      estimatedSales = Math.floor(Math.random() * (this.maxSalesPerHour - this.minSalesPerHour + 1)) + this.minSalesPerHour;
-    //   console.log('current hour: ' + hoursOfOperations[i]);
-    //   console.log('estimated sales: ' + estimatedSales);
-    //   console.log('current forecast: ' + Math.ceil(estimatedSales * this.avgCookiesPerSale));
-      cookieSalesForecastPerHour = Math.ceil(estimatedSales * this.avgCookiesPerSale);
-      this.cookieSalesForecast.push([hoursOfOperations[i],cookieSalesForecastPerHour]);
-      this.totalDailySales += cookieSalesForecastPerHour;
-    }
-  }
-};
-
-var storeNumber001 = {
-  storeName: 'Sockeye',
-  storeLocation: 'SeaTac Airport',
-  minSalesPerHour: 3,
-  maxSalesPerHour: 24,
-  avgCookiesPerSale: 1.2,
-  cookieSalesForecast: [],
-  totalDailySales: 0,
-  forecastCookieSales: function () {
-    // for (var i in hoursOfOperations) {
-    var estimatedSales;
-    var cookieSalesForecastPerHour;
-    for (var i = 0; i < hoursOfOperations.length; i++ ) {
-      estimatedSales = Math.floor(Math.random() * (this.maxSalesPerHour - this.minSalesPerHour + 1)) + this.minSalesPerHour;
-    //   console.log('current hour: ' + hoursOfOperations[i]);
-    //   console.log('estimated sales: ' + estimatedSales);
-    //   console.log('current forecast: ' + Math.ceil(estimatedSales * this.avgCookiesPerSale));
-      cookieSalesForecastPerHour = Math.ceil(estimatedSales * this.avgCookiesPerSale);
-      this.cookieSalesForecast.push([hoursOfOperations[i],cookieSalesForecastPerHour]);
-      this.totalDailySales += cookieSalesForecastPerHour;
-    }
-  }
-};
-
-var storeNumber002 = {
-  storeName: 'Coho',
-  storeLocation: 'Seattle Center',
-  minSalesPerHour: 11,
-  maxSalesPerHour: 38,
-  avgCookiesPerSale: 3.7,
-  cookieSalesForecast: [],
-  totalDailySales: 0,
-  forecastCookieSales: function () {
-    var estimatedSales;
-    var cookieSalesForecastPerHour;
-    for (var i = 0; i < hoursOfOperations.length; i++ ) {
+    for (var i = 0; i < hoursOfOperations.length; i++) {
       estimatedSales = Math.floor(Math.random() * (this.maxSalesPerHour - this.minSalesPerHour + 1)) + this.minSalesPerHour;
       cookieSalesForecastPerHour = Math.ceil(estimatedSales * this.avgCookiesPerSale);
-      this.cookieSalesForecast.push([hoursOfOperations[i],cookieSalesForecastPerHour]);
+      this.cookieSalesForecast.push([hoursOfOperations[i], cookieSalesForecastPerHour]);
       this.totalDailySales += cookieSalesForecastPerHour;
     }
-  }
-};
-  
-  
+  };
 
-var storeNumber003 = {
-  storeName: 'Pink',
-  storeLocation: 'Capitol Hill',
-  minSalesPerHour: 20,
-  maxSalesPerHour: 38,
-  avgCookiesPerSale: 2.3,
-  cookieSalesForecast: [],
-  totalDailySales: 0,
-  forecastCookieSales: function () {
-    var estimatedSales;
-    var cookieSalesForecastPerHour;
-    for (var i = 0; i < hoursOfOperations.length; i++ ) {
-      estimatedSales = Math.floor(Math.random() * (this.maxSalesPerHour - this.minSalesPerHour + 1)) + this.minSalesPerHour;
-      cookieSalesForecastPerHour = Math.ceil(estimatedSales * this.avgCookiesPerSale);
-      this.cookieSalesForecast.push([hoursOfOperations[i],cookieSalesForecastPerHour]);
-      this.totalDailySales += cookieSalesForecastPerHour;
-    }
-  }
-};
+  // this is awful. view data in my constructor! the concerns! the concerns!   
+  this.renderCookieSalesForecast = function (salesForecastTableId) {
+    var cell = 0;
+    this.forecastCookieSales();
+        
+    var newRow = salesForecastTableId.insertRow();
+    newRow.id = this.storeLocation;
 
-var storeNumber004 = {
-  storeName: 'Chum',
-  storeLocation: 'Alki',
-  minSalesPerHour: 2,
-  maxSalesPerHour: 16,
-  avgCookiesPerSale: 4.6,
-  cookieSalesForecast: [],
-  totalDailySales: 0,
-  forecastCookieSales: function () {
-    var estimatedSales;
-    var cookieSalesForecastPerHour;
-    for (var i = 0; i < hoursOfOperations.length; i++ ) {
-      estimatedSales = Math.floor(Math.random() * (this.maxSalesPerHour - this.minSalesPerHour + 1)) + this.minSalesPerHour;
-      cookieSalesForecastPerHour = Math.ceil(estimatedSales * this.avgCookiesPerSale);
-      this.cookieSalesForecast.push([hoursOfOperations[i],cookieSalesForecastPerHour]);
-      this.totalDailySales += cookieSalesForecastPerHour;
-    }
-  }
-};
-
-var salesForecastTableId = document.getElementById('salesForecastTable');
-var stores = [storeNumber000,storeNumber001,storeNumber002,storeNumber003,storeNumber004];
-var cell = 0;
-
-var generateHeaderRow = function() {
-
-  // generate header row
-  var headerRow = salesForecastTableId.insertRow(0);
-  var headerCell0 = headerRow.insertCell(0);
-  headerCell0.innerHTML = 'Store / Hour';
-
-  for (var h = 0; h < hoursOfOperations.length; h++) {
-    // "h + 1" begins in the second column of the table
-    cell = headerRow.insertCell(h + 1);
-    cell.innerHTML = hoursOfOperations[h];
-  }
-
-  // add the totals column to the header row
-  var headerTotalCell = headerRow.insertCell(hoursOfOperations.length+1);
-  headerTotalCell.innerHTML = 'Total';
-
-};
-
-var generateSalesRows = function() {
-
-  // generate store rows
-  var rowCount = 1;
-  for (var s = 0; s < stores.length; s++ ) {
-    stores[s].forecastCookieSales();
-    // use i + 1 to skip the header row at i = 0
-    var storeRow = salesForecastTableId.insertRow(s + 1);
-    var storeRow1Cell0 = storeRow.insertCell(0);
-    storeRow1Cell0.innerHTML = stores[s].storeLocation;
+    var newRow1Cell0 = newRow.insertCell(0);
+    newRow1Cell0.appendChild(document.createTextNode(this.storeLocation));
 
     for (var r = 0; r < hoursOfOperations.length; r++) {
-      cell = storeRow.insertCell(r + 1);
-      cell.innerHTML = stores[s].cookieSalesForecast[r][1];
+      cell = newRow.insertCell(r + 1);
+      cell.appendChild(document.createTextNode(this.cookieSalesForecast[r][1]));
     }
 
-    //add the per store total
-    cell = storeRow.insertCell(hoursOfOperations.length + 1);
-    cell.innerHTML = stores[s].totalDailySales;
+    cell = newRow.insertCell(hoursOfOperations.length + 1);
+    cell.appendChild(document.createTextNode(this.totalDailySales));
+  };
 
-    rowCount += 1;
+}
+
+
+//////////////////////////////////////////////////////
+// Generate all the store objects.
+//
+var makeStores = function () {
+  var stores = [];
+  stores.push(new NewStore('King', '1st and Pike', 23, 65, 6.3));
+  stores.push(new NewStore('Sockeye', 'SeaTac Airport', 3, 24, 1.2));
+  stores.push(new NewStore('Coho', 'Seattle Center', 11, 38, 3.7));
+  stores.push(new NewStore('Pink', 'Capitol Hill', 20, 38, 2.3));
+  stores.push(new NewStore('Chum', 'Alki', 2, 16, 4.6));
+  return stores;
+};
+
+
+//////////////////////////////////////////////////////
+// Header row for the sales table. Accepts
+// the Id of the html table as an input
+//
+var generateHeaderRow = function (salesForecastTableId) {
+  var cell = 0;
+
+  var headerRow = salesForecastTableId.insertRow(0);
+  headerRow.insertCell(cell);  // inserts an empty cell
+ 
+  for (var i = 0; i < hoursOfOperations.length; i++) {
+    // "i + 1" begins in the second column of the table
+    cell = headerRow.insertCell(i + 1);
+    cell.appendChild(document.createTextNode(hoursOfOperations[i]));
   }
 
-  return rowCount;
+  var headerTotalCell = headerRow.insertCell(hoursOfOperations.length + 1);
+  headerTotalCell.appendChild(document.createTextNode('Daily Location Total'));
 
 };
 
-var generateFooterRow = function (rowCount) {
-  // totals
-  var totalsRow = salesForecastTableId.insertRow(rowCount); //use last rowCount for next row.
-  var totalsRowCell0 = totalsRow.insertCell(0);
-  totalsRowCell0.innerHTML = 'Totals';
 
-  for (var t = 0; t < hoursOfOperations.length; t++) {
+
+//////////////////////////////////////////////////////
+// Footer row for the sales table. Accepts  
+// storeList (so we can count stores and access 
+// daily totals) and the Id of the html table as 
+// an input
+//
+var generateFooterRow = function (storeList, salesForecastTableId) {
+  var cell = 0;
+
+  var newRow = salesForecastTableId.insertRow();
+  newRow.id = 'Totals';
+
+  var newRow1Cell0 = newRow.insertCell(0);
+  newRow1Cell0.appendChild(document.createTextNode('Totals'));
+
+  for (var i = 0; i < hoursOfOperations.length; i++) {
     var totalOfAllStoresHourly = 0;
-    for (var s = 0; s < stores.length; s++ ) {
-      totalOfAllStoresHourly += stores[s].cookieSalesForecast[t][1];
+    for (var s = 0; s < storeList.length; s++) {
+      totalOfAllStoresHourly += storeList[s].cookieSalesForecast[i][1];
     }
-  
-    cell = totalsRow.insertCell(t + 1);
-    cell.innerHTML = totalOfAllStoresHourly;
-  }
-  
-  // sum the store daily totals
-  var grandTotal = 0;
-  for (s = 0; s < stores.length; s++ ) {
-    grandTotal += stores[s].totalDailySales;
+
+    cell = newRow.insertCell(i + 1);
+    cell.appendChild(document.createTextNode(totalOfAllStoresHourly));
+
   }
 
-  cell = totalsRow.insertCell(hoursOfOperations.length + 1);
-  cell.innerHTML = grandTotal;
+  var grandTotal = 0;
+  for (s = 0; s < storeList.length; s++) {
+    grandTotal += storeList[s].totalDailySales;
+  }
+
+  cell = newRow.insertCell(hoursOfOperations.length + 1);
+  cell.appendChild(document.createTextNode(grandTotal));
+
 };
 
-var refreshCookieSalesForecast = (function() {
-  generateHeaderRow();
-  var rowCount = generateSalesRows();
-  generateFooterRow(rowCount);
-}());
+(function () {
+  var salesForecastTableId = document.getElementById('salesForecastTable');
 
+  generateHeaderRow(salesForecastTableId);
+
+  var storeList = makeStores();
+  for (var i = 0; i < storeList.length; i++) {
+    storeList[i].renderCookieSalesForecast(salesForecastTableId);
+  }
+
+  generateFooterRow(storeList,salesForecastTableId);
+}());
