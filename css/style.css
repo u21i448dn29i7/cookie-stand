@@ -1,5 +1,13 @@
 /* @import "reset.css"; */
+* {
+    border: 1px solid gray;
+}
+
 
 table {
     width: 100%;
 }
+ul {
+    list-style-image: url('../img/salmon.gif');
+}
+
