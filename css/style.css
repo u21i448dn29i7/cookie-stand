@@ -20,16 +20,27 @@ a:visited {
     text-decoration: none;
     color: #000000;
 }
+
 a:hover {
     font-weight: bolder;
     /* background-color: lightgray; */
-    color: lightseagreen;    
+    color: lightseagreen;
 }
-
 
 #salesForecastTable {
     width: 100%;
     margin-top: 20px;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 
 ul {
@@ -44,12 +55,17 @@ header {
     height: 100%;
     display: flex;
     align-items: center;
+    border-bottom: 2px solid;
+    /* position: fixed; */
+}
+
+section>h1 {
+    font-size: 3em;
 }
 
 article {
     width: 100%;
     display: inline-block;
-    /* height: 267px; */
 }
 
 article>p {
@@ -58,7 +74,12 @@ article>p {
 }
 
 article>h1 {
-    font-size: 3em;
+    font-size: 2em;
+    margin: 10px;
+}
+
+article>h2 {
+    font-size: 1.5em;
     margin: 10px;
 }
 
@@ -69,7 +90,6 @@ article>h1 {
 #site-nav {
     font-size: 3em;
     margin-left: auto;
-    /* float: right; */
 }
 
 .socialLinkWrapper {
@@ -108,4 +128,10 @@ article>h1 {
 #location-map {
     width: 200px;
     margin-top: 10px;
+}
+
+#privacy-image {
+    display: block;
+    margin: 0 auto;
+    width: 600px;
 }
