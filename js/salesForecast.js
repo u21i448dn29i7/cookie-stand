@@ -110,6 +110,8 @@ var generateFooterRow = function (salesForecastTableId) {
 
 };
 
+
+
 //////////////////////////////////////////////////////
 // Generate all the store objects.
 //
@@ -133,3 +135,4 @@ var generateFooterRow = function (salesForecastTableId) {
 
   generateFooterRow(salesForecastTableId);
 }());
+

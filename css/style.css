@@ -101,6 +101,11 @@ article>h2 {
     color: black
 }
 
+/* .article-image-right {
+    background-color:lightgrey;
+    padding: 0;
+} */
+
 .inline-image-left {
     float: left;
     width: 450px;
@@ -134,4 +139,16 @@ article>h2 {
     display: block;
     margin: 0 auto;
     width: 600px;
+}
+
+.button {
+    background-color: rgb(23, 16, 117);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    /* text-decoration: none; */
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
 }
