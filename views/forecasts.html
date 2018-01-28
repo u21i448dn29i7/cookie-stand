@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Salmon Cookies v2.0</title>
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <!-- http://fontawesome.io/icons/#brand -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" />
+
+</head>
+
+<body>
+    <header>
+        <div id='site-name'>
+            <p>
+                <a href='../index.html'>Salmon Cookies</a>
+            </p>
+        </div>
+        <nav id='site-nav'>
+            <ul>
+                <li class="socialLinkWrapper">
+                    <a class="socialLink" title="Contact Us" target="views/contact.html" href="#">
+                        <i class="fa fa-envelope"></i>
+                    </a>
+                </li>
+                <li class="socialLinkWrapper">
+                    <a class="socialLink" title="Facebook" target="_blank" href="#">
+                        <i class="fa fa-facebook-square"></i>
+                    </a>
+                </li>
+                <li class="socialLinkWrapper">
+                    <a class="socialLink" title="Twitter" target="_blank" href="#">
+                        <i class="fa fa-twitter-square"></i>
+                    </a>
+                </li>
+                <li class="socialLinkWrapper">
+                    <a class="socialLink" title="Instagram" target="_blank" href="#">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                </li>
+                <li class="socialLinkWrapper">
+                    <a class="socialLink" title="Pinterest" target="_blank" href="#">
+                        <i class="fa fa-pinterest-square"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <article>
+            <h1>Daily Sales Forecast by Location</h1>
+            <table id="salesForecastTable"></table>
+        </article>
+    </section>
+    <footer>
+        <div class="footer-links">
+            <div id='footer-column1'>
+                <ul>
+                    <li>
+                        <a href='rd.html'>Newest Creations</a>
+                    </li>
+                    <li>
+                        <a href='terms.html'>Terms and Conditions</a>
+                    </li>
+                    <li>
+                        <a href='prvicy.html'>Privacy Notice</a>
+                    </li>
+                </ul>
+            </div>
+            <div id='footer-column2'>
+                <ul>
+                    <li>
+                        <a href='faq.html'>FAQ</a>
+                    </li>
+                    <li>
+                        <a href='about.html'>About Us</a>
+                    </li>
+                    <li>
+                        <a href='contact.html'>Contact Us</a>
+                    </li>
+                    <li>
+                        <a href='forecasts.html'>Forecasts</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class='footer-column3'>
+                <div>
+                    <img id='location-map' src="../img/selection_004.gif" alt="Temp Map" />
+                </div>
+            </div>
+
+    </footer>
+    <div class='footer-copyleft'>
+        <span id='copyleft-symbol'>&copy; 2018
+            <a href='https://www.beb.com'>www.beb.com</a>
+        </span>
+    </div>
+
+    <script src="../js/salesForecast.js"></script>
+
+</body>
+
+</html>

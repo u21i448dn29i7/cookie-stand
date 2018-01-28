@@ -2,13 +2,14 @@
 
 // hoursOfOperations are 6AM __to__ 8PM or 14 Hrs.
 var hoursOfOperations = ['6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM'];
+var stores = [];
 
 //////////////////////////////////////////////////////
 // Constructor for a new store object. 
 // new NewStore('string', 'string', num, num, num);
 //
 // Really, I just wanted to write "num, num, num" 
-// SOMEWHERE in the Salmon Cookies v2.0 code.
+// SOMEWHERE in the code....
 //
 function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale) {
 
@@ -35,9 +36,8 @@ function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, av
   this.renderCookieSalesForecast = function (salesForecastTableId) {
     var cell = 0;
     this.forecastCookieSales();
-        
+
     var newRow = salesForecastTableId.insertRow();
-    newRow.id = this.storeLocation;
 
     var newRow1Cell0 = newRow.insertCell(0);
     newRow1Cell0.appendChild(document.createTextNode(this.storeLocation));
@@ -52,21 +52,6 @@ function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, av
   };
 
 }
-
-
-//////////////////////////////////////////////////////
-// Generate all the store objects.
-//
-var makeStores = function () {
-  var stores = [];
-  stores.push(new NewStore('King', '1st and Pike', 23, 65, 6.3));
-  stores.push(new NewStore('Sockeye', 'SeaTac Airport', 3, 24, 1.2));
-  stores.push(new NewStore('Coho', 'Seattle Center', 11, 38, 3.7));
-  stores.push(new NewStore('Pink', 'Capitol Hill', 20, 38, 2.3));
-  stores.push(new NewStore('Chum', 'Alki', 2, 16, 4.6));
-  return stores;
-};
-
 
 //////////////////////////////////////////////////////
 // Header row for the sales table. Accepts
@@ -89,15 +74,13 @@ var generateHeaderRow = function (salesForecastTableId) {
 
 };
 
-
-
 //////////////////////////////////////////////////////
 // Footer row for the sales table. Accepts  
-// storeList (so we can count stores and access 
+// stores (so we can count stores and access 
 // daily totals) and the Id of the html table as 
 // an input
 //
-var generateFooterRow = function (storeList, salesForecastTableId) {
+var generateFooterRow = function (salesForecastTableId) {
   var cell = 0;
 
   var newRow = salesForecastTableId.insertRow();
@@ -108,8 +91,8 @@ var generateFooterRow = function (storeList, salesForecastTableId) {
 
   for (var i = 0; i < hoursOfOperations.length; i++) {
     var totalOfAllStoresHourly = 0;
-    for (var s = 0; s < storeList.length; s++) {
-      totalOfAllStoresHourly += storeList[s].cookieSalesForecast[i][1];
+    for (var s = 0; s < stores.length; s++) {
+      totalOfAllStoresHourly += stores[s].cookieSalesForecast[i][1];
     }
 
     cell = newRow.insertCell(i + 1);
@@ -118,8 +101,8 @@ var generateFooterRow = function (storeList, salesForecastTableId) {
   }
 
   var grandTotal = 0;
-  for (s = 0; s < storeList.length; s++) {
-    grandTotal += storeList[s].totalDailySales;
+  for (s = 0; s < stores.length; s++) {
+    grandTotal += stores[s].totalDailySales;
   }
 
   cell = newRow.insertCell(hoursOfOperations.length + 1);
@@ -127,15 +110,26 @@ var generateFooterRow = function (storeList, salesForecastTableId) {
 
 };
 
+//////////////////////////////////////////////////////
+// Generate all the store objects.
+//
+(function () {
+  stores.push(new NewStore('King', '1st and Pike', 23, 65, 6.3));
+  stores.push(new NewStore('Sockeye', 'SeaTac Airport', 3, 24, 1.2));
+  stores.push(new NewStore('Coho', 'Seattle Center', 11, 38, 3.7));
+  stores.push(new NewStore('Pink', 'Capitol Hill', 20, 38, 2.3));
+  stores.push(new NewStore('Chum', 'Alki', 2, 16, 4.6));
+}());
+
+
 (function () {
   var salesForecastTableId = document.getElementById('salesForecastTable');
 
   generateHeaderRow(salesForecastTableId);
 
-  var storeList = makeStores();
-  for (var i = 0; i < storeList.length; i++) {
-    storeList[i].renderCookieSalesForecast(salesForecastTableId);
+  for (var i = 0; i < stores.length; i++) {
+    stores[i].renderCookieSalesForecast(salesForecastTableId);
   }
 
-  generateFooterRow(storeList,salesForecastTableId);
+  generateFooterRow(salesForecastTableId);
 }());
