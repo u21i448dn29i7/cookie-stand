@@ -33,11 +33,11 @@ function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, av
   };
 
   // this is awful. view data in my constructor! the concerns! the concerns!   
-  this.renderCookieSalesForecast = function (salesForecastTableId) {
+  this.renderCookieSalesForecast = function (tableBody) {
     var cell = 0;
     this.forecastCookieSales();
 
-    var newRow = salesForecastTableId.insertRow();
+    var newRow = tableBody.insertRow();
 
     var newRow1Cell0 = newRow.insertCell(0);
     newRow1Cell0.appendChild(document.createTextNode(this.storeLocation));
@@ -60,7 +60,10 @@ function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, av
 var generateHeaderRow = function (salesForecastTableId) {
   var cell = 0;
 
-  var headerRow = salesForecastTableId.insertRow(0);
+  var tableHead = salesForecastTableId.createTHead();
+  tableHead.id = 'table-head';
+
+  var headerRow = tableHead.insertRow(0);
   headerRow.insertCell(cell);  // inserts an empty cell
  
   for (var i = 0; i < hoursOfOperations.length; i++) {
@@ -71,6 +74,8 @@ var generateHeaderRow = function (salesForecastTableId) {
 
   var headerTotalCell = headerRow.insertCell(hoursOfOperations.length + 1);
   headerTotalCell.appendChild(document.createTextNode('Daily Location Total'));
+
+  return tableHead;
 
 };
 
@@ -83,7 +88,8 @@ var generateHeaderRow = function (salesForecastTableId) {
 var generateFooterRow = function (salesForecastTableId) {
   var cell = 0;
 
-  var newRow = salesForecastTableId.insertRow();
+  var tableFoot = salesForecastTableId.createTFoot();
+  var newRow = tableFoot.insertRow();
   newRow.id = 'Totals';
 
   var newRow1Cell0 = newRow.insertCell(0);
@@ -129,8 +135,10 @@ var generateFooterRow = function (salesForecastTableId) {
 
   generateHeaderRow(salesForecastTableId);
 
+  var tableBody = salesForecastTableId.createTBody();
+
   for (var i = 0; i < stores.length; i++) {
-    stores[i].renderCookieSalesForecast(salesForecastTableId);
+    stores[i].renderCookieSalesForecast(tableBody);
   }
 
   generateFooterRow(salesForecastTableId);
