@@ -58,6 +58,36 @@
             <table id='salesForecastTable'></table>
             <button class='button' onclick='document.location.reload()'>Refresh Forecast</button>
         </article>
+        <article>
+            <form>
+                <fieldset>
+                    <legend>Add New Store</legend>
+                    <label for="name">Name:</label>
+                    <input id="storeName" type="text" name="name" size="30" maxlength="100">
+                    <br />
+                    <label>Store Location:
+                        <input id="storeLocation" type="text" name="storeLocation" size="30" maxlength="100" />
+                    </label>
+                    <br />
+                    <label>Estimated minimum customers per hour:
+                        <input id="minSalesPerHour" type="number" name="estMinCustPerHour" size="10" maxlength="4" />
+                    </label>
+                    <br />
+                    <label>Estimated maximum customers per hour:
+                        <input id="maxSalesPerHour" type="number" name="estMaxCustPerHour" size="10" maxlength="4" />
+                    </label>
+                    <br />
+                    <label>Estimated average cookie sales per customer:
+                        <input id="avgCookiesPerSale" type="number" name="estAverageSalesPerCustomer" size="10" maxlength="4">
+                    </label>
+                    <br />
+                </fieldset>
+                <button id="saveAndContinue">
+                    Save and Continue
+                </button>
+            </form>
+            <div id="whichButton" />
+        </article>
     </section>
     <footer>
         <div class='footer-links'>
@@ -105,7 +135,7 @@
     </div>
 
     <script src="../js/salesForecast.js"></script>
-
+    <!-- <script src="../js/newStore.js"></script> -->
 </body>
 
 </html>

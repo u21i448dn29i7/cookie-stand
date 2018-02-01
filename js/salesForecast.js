@@ -1,8 +1,11 @@
 'use strict';
 
 // hoursOfOperations are 6AM __to__ 8PM or 14 Hrs.
-var hoursOfOperations = ['6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM'];
+const hoursOfOperations = ['6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM'];
 var stores = [];
+const btnSaveAndContinue = document.getElementById('saveAndContinue');
+const salesForecastTableId = document.getElementById('salesForecastTable');
+var tableBody = salesForecastTableId.createTBody();
 
 //////////////////////////////////////////////////////
 // Constructor for a new store object. 
@@ -11,7 +14,7 @@ var stores = [];
 // Really, I just wanted to write "num, num, num" 
 // SOMEWHERE in the code....
 //
-function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale) {
+function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale, stores) {
 
   this.storeName = storeName;
   this.storeLocation = storeLocation;
@@ -20,12 +23,14 @@ function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, av
   this.avgCookiesPerSale = avgCookiesPerSale;
   this.cookieSalesForecast = [];
   this.totalDailySales = 0;
+  stores.push(this);
 
   this.forecastCookieSales = function () {
     var estimatedSales;
     var cookieSalesForecastPerHour;
     for (var i = 0; i < hoursOfOperations.length; i++) {
       estimatedSales = Math.floor(Math.random() * (this.maxSalesPerHour - this.minSalesPerHour + 1)) + this.minSalesPerHour;
+      // console.log('estimated sales for ' + this.store + ': ' + estimatedSales);
       cookieSalesForecastPerHour = Math.ceil(estimatedSales * this.avgCookiesPerSale);
       this.cookieSalesForecast.push([hoursOfOperations[i], cookieSalesForecastPerHour]);
       this.totalDailySales += cookieSalesForecastPerHour;
@@ -57,15 +62,15 @@ function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, av
 // Header row for the sales table. Accepts
 // the Id of the html table as an input
 //
-var generateHeaderRow = function (salesForecastTableId) {
+var generateHeaderRow = function () {
   var cell = 0;
 
-  var tableHead = salesForecastTableId.createTHead();
+  const tableHead = salesForecastTableId.createTHead();
   tableHead.id = 'table-head';
 
-  var headerRow = tableHead.insertRow(0);
-  headerRow.insertCell(cell);  // inserts an empty cell
- 
+  const headerRow = tableHead.insertRow(0);
+  headerRow.insertCell(cell); // inserts an empty cell
+
   for (var i = 0; i < hoursOfOperations.length; i++) {
     // "i + 1" begins in the second column of the table
     cell = headerRow.insertCell(i + 1);
@@ -85,14 +90,18 @@ var generateHeaderRow = function (salesForecastTableId) {
 // daily totals) and the Id of the html table as 
 // an input
 //
-var generateFooterRow = function (salesForecastTableId) {
+var generateFooterRow = function () {
   var cell = 0;
 
-  var tableFoot = salesForecastTableId.createTFoot();
-  var newRow = tableFoot.insertRow();
+  if (document.getElementById('Totals')) {
+    (document.getElementById('Totals')).remove();
+  }
+
+  const tableFoot = salesForecastTableId.createTFoot();
+  const newRow = tableFoot.insertRow();
   newRow.id = 'Totals';
 
-  var newRow1Cell0 = newRow.insertCell(0);
+  const newRow1Cell0 = newRow.insertCell(0);
   newRow1Cell0.appendChild(document.createTextNode('Totals'));
 
   for (var i = 0; i < hoursOfOperations.length; i++) {
@@ -105,7 +114,7 @@ var generateFooterRow = function (salesForecastTableId) {
     cell.appendChild(document.createTextNode(totalOfAllStoresHourly));
 
   }
-
+  console.log('Inside the generateFooter function: ' + stores.length);
   var grandTotal = 0;
   for (s = 0; s < stores.length; s++) {
     grandTotal += stores[s].totalDailySales;
@@ -116,31 +125,61 @@ var generateFooterRow = function (salesForecastTableId) {
 
 };
 
+//////////////////////////////////////////////////////
+// Create click event listener and call addNewStoreFunc
+//
 
+btnSaveAndContinue.addEventListener('click', function () {
+  event.preventDefault();
+  var storeName = document.getElementById('storeName').value;
+  console.log('storeName: ' + storeName);
+  var storeLocation = document.getElementById('storeLocation').value;
+  console.log('storeLocation: ' + storeLocation);
+  var minSalesPerHour = document.getElementById('minSalesPerHour').value;
+  console.log('minSalesPerHour: ' + minSalesPerHour);
+  var maxSalesPerHour = document.getElementById('maxSalesPerHour').value;
+  console.log('maxSalesPerHour: ' + maxSalesPerHour);
+  var avgCookiesPerSale = document.getElementById('avgCookiesPerSale').value;
+  console.log('avgCookiesPerSale: ' + avgCookiesPerSale);
+
+
+
+  addNewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale);
+
+});
+
+function addNewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale) {
+  new NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale, stores);
+  stores[stores.length - 1].renderCookieSalesForecast(tableBody);
+  generateFooterRow();
+}
 
 //////////////////////////////////////////////////////
-// Generate all the store objects.
+// Init all the store objects.
 //
-(function () {
-  stores.push(new NewStore('King', '1st and Pike', 23, 65, 6.3));
-  stores.push(new NewStore('Sockeye', 'SeaTac Airport', 3, 24, 1.2));
-  stores.push(new NewStore('Coho', 'Seattle Center', 11, 38, 3.7));
-  stores.push(new NewStore('Pink', 'Capitol Hill', 20, 38, 2.3));
-  stores.push(new NewStore('Chum', 'Alki', 2, 16, 4.6));
-}());
+// (function () {
+//   new NewStore('King', '1st and Pike', 23, 65, 6.3, stores);
+//   new NewStore('Sockeye', 'SeaTac Airport', 3, 24, 1.2, stores);
+//   new NewStore('Coho', 'Seattle Center', 11, 38, 3.7, stores);
+//   new NewStore('Pink', 'Capitol Hill', 20, 38, 2.3, stores);
+//   new NewStore('Chum', 'Alki', 2, 16, 4.6, stores);
+// }());
 
 
 (function () {
-  var salesForecastTableId = document.getElementById('salesForecastTable');
-
-  generateHeaderRow(salesForecastTableId);
-
-  var tableBody = salesForecastTableId.createTBody();
+  generateHeaderRow();
 
   for (var i = 0; i < stores.length; i++) {
     stores[i].renderCookieSalesForecast(tableBody);
   }
 
-  generateFooterRow(salesForecastTableId);
-}());
+  // Init starting stores including the footer.
+  // It's wasteful because of the .remove() on the table footer, but it's
+  // effective for adding new rows and recalculating the footer each time.
+  addNewStore('King', '1st and Pike', 23, 65, 6.3, stores);
+  addNewStore('Sockeye', 'SeaTac Airport', 3, 24, 1.2, stores);
+  addNewStore('Coho', 'Seattle Center', 11, 38, 3.7, stores);
+  addNewStore('Pink', 'Capitol Hill', 20, 38, 2.3, stores);
+  addNewStore('Chum', 'Alki', 2, 16, 4.6, stores);
 
+}());
