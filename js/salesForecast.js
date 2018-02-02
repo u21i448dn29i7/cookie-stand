@@ -36,7 +36,11 @@ function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, av
     }
   };
 
+<<<<<<< HEAD
   // this is awful. view data in my constructor! the concerns! the concerns!
+=======
+  // this is awful. view data in my constructor! the concerns! the concerns!   
+>>>>>>> 57e559c8343becd13c25218680144fc20b16eae7
   this.renderCookieSalesForecast = function (tableBody) {
     var cell = 0;
     this.forecastCookieSales();
@@ -64,12 +68,21 @@ function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, av
 var generateHeaderRow = function () {
   var cell = 0;
 
+<<<<<<< HEAD
   const tableHead = salesForecastTableId.createTHead();
   tableHead.id = 'table-head';
 
   const headerRow = tableHead.insertRow(0);
   headerRow.insertCell(cell); // inserts an empty cell
 
+=======
+  var tableHead = salesForecastTableId.createTHead();
+  tableHead.id = 'table-head';
+
+  var headerRow = tableHead.insertRow(0);
+  headerRow.insertCell(cell);  // inserts an empty cell
+ 
+>>>>>>> 57e559c8343becd13c25218680144fc20b16eae7
   for (var i = 0; i < hoursOfOperations.length; i++) {
     // "i + 1" begins in the second column of the table
     cell = headerRow.insertCell(i + 1);
@@ -78,6 +91,8 @@ var generateHeaderRow = function () {
 
   var headerTotalCell = headerRow.insertCell(hoursOfOperations.length + 1);
   headerTotalCell.appendChild(document.createTextNode('Daily Location Total'));
+
+  return tableHead;
 
 };
 
@@ -90,12 +105,17 @@ var generateHeaderRow = function () {
 var generateFooterRow = function () {
   var cell = 0;
 
+<<<<<<< HEAD
   if (document.getElementById('Totals')) {
     (document.getElementById('Totals')).remove();
   }
 
   const tableFoot = salesForecastTableId.createTFoot();
   const newRow = tableFoot.insertRow();
+=======
+  var tableFoot = salesForecastTableId.createTFoot();
+  var newRow = tableFoot.insertRow();
+>>>>>>> 57e559c8343becd13c25218680144fc20b16eae7
   newRow.id = 'Totals';
 
   const newRow1Cell0 = newRow.insertCell(0);
@@ -161,6 +181,8 @@ function addNewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour,
 
 (function () {
   generateHeaderRow();
+
+  var tableBody = salesForecastTableId.createTBody();
 
   for (var i = 0; i < stores.length; i++) {
     stores[i].renderCookieSalesForecast(tableBody);
