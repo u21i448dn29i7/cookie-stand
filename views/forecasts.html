@@ -56,7 +56,7 @@
         <article>
             <h1>Daily Sales Forecast by Location</h1>
             <table id='salesForecastTable'></table>
-            <button class='button' onclick='document.location.reload()'>Refresh Forecast</button>
+            <!-- <button class='button' onclick='document.location.reload()'>Refresh Forecast</button> -->
         </article>
         <article>
             <form>
@@ -70,23 +70,22 @@
                     </label>
                     <br />
                     <label>Estimated minimum customers per hour:
-                        <input id="minSalesPerHour" type="number" name="minSalesPerHour" size="10" maxlength="4" />
+                        <input id="minSalesPerHour" type="number" step="1" min="0" name="minSalesPerHour" size="10" maxlength="4" />
                     </label>
                     <br />
                     <label>Estimated maximum customers per hour:
-                        <input id="maxSalesPerHour" type="number" name="maxSalesPerHour" size="10" maxlength="4" />
+                        <input id="maxSalesPerHour" type="number" step="1" min="1" name="maxSalesPerHour" size="10" maxlength="4" />
                     </label>
                     <br />
                     <label>Estimated average cookie sales per customer:
-                        <input id="avgCookiesPerSale" type="number" name="avgCookiesPerSale" size="10" maxlength="4">
+                        <input id="avgCookiesPerSale" type="number" step="0.1" min="0.1" ame="avgCookiesPerSale" size="10" maxlength="4">
                     </label>
                     <br />
                 </fieldset>
-                <button id="saveAndContinue">
+                <button id="saveAndContinue" class="button">
                     Save and Continue
                 </button>
             </form>
-            <div id="whichButton" />
         </article>
     </section>
     <footer>

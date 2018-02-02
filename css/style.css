@@ -34,7 +34,7 @@ a:hover {
 }
 
 thead {
-    background-color: green;
+    background-color: rgb(163, 177, 195);
 }
 
 th,
@@ -48,7 +48,7 @@ tr:nth-child(even) {
 }
 
 tfoot {
-    background-color: green;
+    background-color: rgb(163, 177, 195);
 }
 
 ul {

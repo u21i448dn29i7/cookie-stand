@@ -128,6 +128,7 @@ var generateFooterRow = function () {
 //
 var form = document.querySelector('form');
 form.addEventListener('submit', function(e) {
+  e.preventDefault();
 
   var storeName = form.elements.storeName.value;
   var storeLocation = form.elements.storeLocation.value;
@@ -135,9 +136,16 @@ form.addEventListener('submit', function(e) {
   var maxSalesPerHour = form.elements.maxSalesPerHour.value;
   var avgCookiesPerSale = form.elements.avgCookiesPerSale.value;
 
-  addNewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale);
-
-  e.preventDefault();
+  if (!storeName || !storeLocation || !minSalesPerHour || !maxSalesPerHour || !avgCookiesPerSale) {
+    alert('Apologies. Looks like you may have missed some values?');
+  // } else if (search each storeLocation property of each object in the stores array) {
+    // like this: https://stackoverflow.com/questions/12462318/find-a-value-in-an-array-of-objects-in-javascript
+    // maybe later.
+    // alert('Apologies. It appears you\'ve already entered this store location.');
+  } else {
+    addNewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale);
+    form.reset();
+  }
 
 });
 
