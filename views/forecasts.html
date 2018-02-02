@@ -56,7 +56,36 @@
         <article>
             <h1>Daily Sales Forecast by Location</h1>
             <table id='salesForecastTable'></table>
-            <button class='button' onclick='document.location.reload()'>Refresh Forecast</button>
+            <!-- <button class='button' onclick='document.location.reload()'>Refresh Forecast</button> -->
+        </article>
+        <article>
+            <form>
+                <fieldset>
+                    <legend>Add New Store</legend>
+                    <label for="name">Name:</label>
+                    <input id="storeName" type="text" name="storeName" size="30" maxlength="100">
+                    <br />
+                    <label>Store Location:
+                        <input id="storeLocation" type="text" name="storeLocation" size="30" maxlength="100" />
+                    </label>
+                    <br />
+                    <label>Estimated minimum customers per hour:
+                        <input id="minSalesPerHour" type="number" step="1" min="0" name="minSalesPerHour" size="10" maxlength="4" />
+                    </label>
+                    <br />
+                    <label>Estimated maximum customers per hour:
+                        <input id="maxSalesPerHour" type="number" step="1" min="1" name="maxSalesPerHour" size="10" maxlength="4" />
+                    </label>
+                    <br />
+                    <label>Estimated average cookie sales per customer:
+                        <input id="avgCookiesPerSale" type="number" step="0.1" min="0.1" ame="avgCookiesPerSale" size="10" maxlength="4">
+                    </label>
+                    <br />
+                </fieldset>
+                <button id="saveAndContinue" class="button">
+                    Save and Continue
+                </button>
+            </form>
         </article>
     </section>
     <footer>
@@ -105,7 +134,7 @@
     </div>
 
     <script src="../js/salesForecast.js"></script>
-
+    <!-- <script src="../js/newStore.js"></script> -->
 </body>
 
 </html>

@@ -33,6 +33,10 @@ a:hover {
     border-collapse: collapse;
 }
 
+thead {
+    background-color: rgb(163, 177, 195);
+}
+
 th,
 td {
     text-align: left;
@@ -41,6 +45,10 @@ td {
 
 tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+tfoot {
+    background-color: rgb(163, 177, 195);
 }
 
 ul {
@@ -66,6 +74,7 @@ section>h1 {
 article {
     width: 100%;
     display: inline-block;
+    padding: 10px;
 }
 
 article>p {

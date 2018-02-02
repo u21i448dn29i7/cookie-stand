@@ -1,8 +1,10 @@
 'use strict';
 
 // hoursOfOperations are 6AM __to__ 8PM or 14 Hrs.
-var hoursOfOperations = ['6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM'];
+const hoursOfOperations = ['6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM'];
 var stores = [];
+const salesForecastTableId = document.getElementById('salesForecastTable');
+var tableBody = salesForecastTableId.createTBody();
 
 //////////////////////////////////////////////////////
 // Constructor for a new store object. 
@@ -11,7 +13,7 @@ var stores = [];
 // Really, I just wanted to write "num, num, num" 
 // SOMEWHERE in the code....
 //
-function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale) {
+function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale, stores) {
 
   this.storeName = storeName;
   this.storeLocation = storeLocation;
@@ -20,24 +22,26 @@ function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, av
   this.avgCookiesPerSale = avgCookiesPerSale;
   this.cookieSalesForecast = [];
   this.totalDailySales = 0;
+  stores.push(this);
 
   this.forecastCookieSales = function () {
     var estimatedSales;
     var cookieSalesForecastPerHour;
     for (var i = 0; i < hoursOfOperations.length; i++) {
-      estimatedSales = Math.floor(Math.random() * (this.maxSalesPerHour - this.minSalesPerHour + 1)) + this.minSalesPerHour;
+      estimatedSales = Math.ceil(Math.random()*(this.maxSalesPerHour-this.minSalesPerHour+1)+this.minSalesPerHour);
+      console.log('estimatedSales for ' + this.storeLocation + ': ' + estimatedSales);
       cookieSalesForecastPerHour = Math.ceil(estimatedSales * this.avgCookiesPerSale);
       this.cookieSalesForecast.push([hoursOfOperations[i], cookieSalesForecastPerHour]);
       this.totalDailySales += cookieSalesForecastPerHour;
     }
   };
 
-  // this is awful. view data in my constructor! the concerns! the concerns!   
-  this.renderCookieSalesForecast = function (salesForecastTableId) {
+  // this is awful. view data in my constructor! the concerns! the concerns!
+  this.renderCookieSalesForecast = function (tableBody) {
     var cell = 0;
     this.forecastCookieSales();
 
-    var newRow = salesForecastTableId.insertRow();
+    var newRow = tableBody.insertRow();
 
     var newRow1Cell0 = newRow.insertCell(0);
     newRow1Cell0.appendChild(document.createTextNode(this.storeLocation));
@@ -57,12 +61,15 @@ function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, av
 // Header row for the sales table. Accepts
 // the Id of the html table as an input
 //
-var generateHeaderRow = function (salesForecastTableId) {
+var generateHeaderRow = function () {
   var cell = 0;
 
-  var headerRow = salesForecastTableId.insertRow(0);
-  headerRow.insertCell(cell);  // inserts an empty cell
- 
+  const tableHead = salesForecastTableId.createTHead();
+  tableHead.id = 'table-head';
+
+  const headerRow = tableHead.insertRow(0);
+  headerRow.insertCell(cell); // inserts an empty cell
+
   for (var i = 0; i < hoursOfOperations.length; i++) {
     // "i + 1" begins in the second column of the table
     cell = headerRow.insertCell(i + 1);
@@ -75,18 +82,23 @@ var generateHeaderRow = function (salesForecastTableId) {
 };
 
 //////////////////////////////////////////////////////
-// Footer row for the sales table. Accepts  
-// stores (so we can count stores and access 
-// daily totals) and the Id of the html table as 
+// Footer row for the sales table. Accepts
+// stores (so we can count stores and access
+// daily totals) and the Id of the html table as
 // an input
 //
-var generateFooterRow = function (salesForecastTableId) {
+var generateFooterRow = function () {
   var cell = 0;
 
-  var newRow = salesForecastTableId.insertRow();
+  if (document.getElementById('Totals')) {
+    (document.getElementById('Totals')).remove();
+  }
+
+  const tableFoot = salesForecastTableId.createTFoot();
+  const newRow = tableFoot.insertRow();
   newRow.id = 'Totals';
 
-  var newRow1Cell0 = newRow.insertCell(0);
+  const newRow1Cell0 = newRow.insertCell(0);
   newRow1Cell0.appendChild(document.createTextNode('Totals'));
 
   for (var i = 0; i < hoursOfOperations.length; i++) {
@@ -110,29 +122,58 @@ var generateFooterRow = function (salesForecastTableId) {
 
 };
 
-
-
 //////////////////////////////////////////////////////
-// Generate all the store objects.
+// Create submit event listener on the form
+// and call addNewStoreFunc
 //
-(function () {
-  stores.push(new NewStore('King', '1st and Pike', 23, 65, 6.3));
-  stores.push(new NewStore('Sockeye', 'SeaTac Airport', 3, 24, 1.2));
-  stores.push(new NewStore('Coho', 'Seattle Center', 11, 38, 3.7));
-  stores.push(new NewStore('Pink', 'Capitol Hill', 20, 38, 2.3));
-  stores.push(new NewStore('Chum', 'Alki', 2, 16, 4.6));
-}());
+var form = document.querySelector('form');
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
 
+  var storeName = form.elements.storeName.value;
+  var storeLocation = form.elements.storeLocation.value;
+  var minSalesPerHour = form.elements.minSalesPerHour.value;
+  var maxSalesPerHour = form.elements.maxSalesPerHour.value;
+  var avgCookiesPerSale = form.elements.avgCookiesPerSale.value;
 
-(function () {
-  var salesForecastTableId = document.getElementById('salesForecastTable');
-
-  generateHeaderRow(salesForecastTableId);
-
-  for (var i = 0; i < stores.length; i++) {
-    stores[i].renderCookieSalesForecast(salesForecastTableId);
+  if (!storeName || !storeLocation || !minSalesPerHour || !maxSalesPerHour || !avgCookiesPerSale) {
+    alert('Apologies. Looks like you may have missed some values?');
+  // } else if (search each storeLocation property of each object in the stores array) {
+    // like this: https://stackoverflow.com/questions/12462318/find-a-value-in-an-array-of-objects-in-javascript
+    // maybe later.
+    // alert('Apologies. It appears you\'ve already entered this store location.');
+  } else {
+    addNewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale);
+    form.reset();
   }
 
-  generateFooterRow(salesForecastTableId);
+});
+
+function addNewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale) {
+  new NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale, stores);
+
+  console.log('avgCookiesPerSale from button e: ' + avgCookiesPerSale);
+
+  stores[stores.length - 1].renderCookieSalesForecast(tableBody);
+  generateFooterRow();
+}
+
+
+(function () {
+  generateHeaderRow();
+
+  for (var i = 0; i < stores.length; i++) {
+    stores[i].renderCookieSalesForecast(tableBody);
+  }
+
+  // Init starting stores including the footer in each.
+  // It's wasteful because of the .remove() on the table footer, but it's
+  // effective for adding new rows and recalculating the footer each time.
+  addNewStore('King', '1st and Pike', 23, 65, 6.3, stores);
+  addNewStore('Sockeye', 'SeaTac Airport', 3, 24, 1.2, stores);
+  addNewStore('Coho', 'Seattle Center', 11, 38, 3.7, stores);
+  addNewStore('Pink', 'Capitol Hill', 20, 38, 2.3, stores);
+  addNewStore('Chum', 'Alki', 2, 16, 4.6, stores);
+
 }());
 
