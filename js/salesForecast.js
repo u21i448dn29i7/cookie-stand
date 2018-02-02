@@ -29,15 +29,15 @@ function NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, av
     var estimatedSales;
     var cookieSalesForecastPerHour;
     for (var i = 0; i < hoursOfOperations.length; i++) {
-      estimatedSales = Math.floor(Math.random() * (this.maxSalesPerHour - this.minSalesPerHour + 1)) + this.minSalesPerHour;
-      // console.log('estimated sales for ' + this.store + ': ' + estimatedSales);
+      estimatedSales = Math.ceil(Math.random()*(this.maxSalesPerHour-this.minSalesPerHour+1)+this.minSalesPerHour);
+      console.log('estimatedSales for ' + this.storeLocation + ': ' + estimatedSales);
       cookieSalesForecastPerHour = Math.ceil(estimatedSales * this.avgCookiesPerSale);
       this.cookieSalesForecast.push([hoursOfOperations[i], cookieSalesForecastPerHour]);
       this.totalDailySales += cookieSalesForecastPerHour;
     }
   };
 
-  // this is awful. view data in my constructor! the concerns! the concerns!   
+  // this is awful. view data in my constructor! the concerns! the concerns!
   this.renderCookieSalesForecast = function (tableBody) {
     var cell = 0;
     this.forecastCookieSales();
@@ -80,14 +80,12 @@ var generateHeaderRow = function () {
   var headerTotalCell = headerRow.insertCell(hoursOfOperations.length + 1);
   headerTotalCell.appendChild(document.createTextNode('Daily Location Total'));
 
-  return tableHead;
-
 };
 
 //////////////////////////////////////////////////////
-// Footer row for the sales table. Accepts  
-// stores (so we can count stores and access 
-// daily totals) and the Id of the html table as 
+// Footer row for the sales table. Accepts
+// stores (so we can count stores and access
+// daily totals) and the Id of the html table as
 // an input
 //
 var generateFooterRow = function () {
@@ -114,7 +112,7 @@ var generateFooterRow = function () {
     cell.appendChild(document.createTextNode(totalOfAllStoresHourly));
 
   }
-  console.log('Inside the generateFooter function: ' + stores.length);
+
   var grandTotal = 0;
   for (s = 0; s < stores.length; s++) {
     grandTotal += stores[s].totalDailySales;
@@ -126,44 +124,32 @@ var generateFooterRow = function () {
 };
 
 //////////////////////////////////////////////////////
-// Create click event listener and call addNewStoreFunc
+// Create submit event listener on the form
+// and call addNewStoreFunc
 //
+var form = document.querySelector('form');
+form.addEventListener('submit', function(e) {
 
-btnSaveAndContinue.addEventListener('click', function () {
-  event.preventDefault();
-  var storeName = document.getElementById('storeName').value;
-  console.log('storeName: ' + storeName);
-  var storeLocation = document.getElementById('storeLocation').value;
-  console.log('storeLocation: ' + storeLocation);
-  var minSalesPerHour = document.getElementById('minSalesPerHour').value;
-  console.log('minSalesPerHour: ' + minSalesPerHour);
-  var maxSalesPerHour = document.getElementById('maxSalesPerHour').value;
-  console.log('maxSalesPerHour: ' + maxSalesPerHour);
-  var avgCookiesPerSale = document.getElementById('avgCookiesPerSale').value;
-  console.log('avgCookiesPerSale: ' + avgCookiesPerSale);
-
-
+  var storeName = form.elements.storeName.value;
+  var storeLocation = form.elements.storeLocation.value;
+  var minSalesPerHour = form.elements.minSalesPerHour.value;
+  var maxSalesPerHour = form.elements.maxSalesPerHour.value;
+  var avgCookiesPerSale = form.elements.avgCookiesPerSale.value;
 
   addNewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale);
+
+  e.preventDefault();
 
 });
 
 function addNewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale) {
   new NewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour, avgCookiesPerSale, stores);
+
+  console.log('avgCookiesPerSale from button e: ' + avgCookiesPerSale);
+
   stores[stores.length - 1].renderCookieSalesForecast(tableBody);
   generateFooterRow();
 }
-
-//////////////////////////////////////////////////////
-// Init all the store objects.
-//
-// (function () {
-//   new NewStore('King', '1st and Pike', 23, 65, 6.3, stores);
-//   new NewStore('Sockeye', 'SeaTac Airport', 3, 24, 1.2, stores);
-//   new NewStore('Coho', 'Seattle Center', 11, 38, 3.7, stores);
-//   new NewStore('Pink', 'Capitol Hill', 20, 38, 2.3, stores);
-//   new NewStore('Chum', 'Alki', 2, 16, 4.6, stores);
-// }());
 
 
 (function () {
@@ -173,7 +159,7 @@ function addNewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour,
     stores[i].renderCookieSalesForecast(tableBody);
   }
 
-  // Init starting stores including the footer.
+  // Init starting stores including the footer in each.
   // It's wasteful because of the .remove() on the table footer, but it's
   // effective for adding new rows and recalculating the footer each time.
   addNewStore('King', '1st and Pike', 23, 65, 6.3, stores);
@@ -183,3 +169,4 @@ function addNewStore(storeName, storeLocation, minSalesPerHour, maxSalesPerHour,
   addNewStore('Chum', 'Alki', 2, 16, 4.6, stores);
 
 }());
+

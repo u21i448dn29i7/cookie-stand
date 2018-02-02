@@ -33,6 +33,10 @@ a:hover {
     border-collapse: collapse;
 }
 
+thead {
+    background-color: green;
+}
+
 th,
 td {
     text-align: left;
@@ -41,6 +45,10 @@ td {
 
 tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+tfoot {
+    background-color: green;
 }
 
 ul {
