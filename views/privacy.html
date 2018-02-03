@@ -8,21 +8,35 @@
 
     <title>Salmon Cookies</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/privacy.css" />
 
     <!-- http://fontawesome.io/icons/#brand -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
 
 </head>
 
 <body>
     <header id='header-wrapper'>
-        <div id='site-name'>
-            <p>
-                <a href='../index.html'>Salmon Cookies</a>
-            </p>
+        <div id="site-name">
+            <a href="../index.html" id="header-text">Salmon Cookies</a>
+            <img id="header-image" src="../img/chinook.png">
         </div>
-        <nav id='site-nav'>
+        <div id="local-nav">
+            <ul>
+                <li>
+                    <a href="shop.html">Shop</a>
+                </li>
+                <li>
+                    <a href="rd.html">What's New</a>
+                </li>
+                <li>
+                    <a href="#locations">Locations</a>
+                </li>
+            </ul>
+        </div>
+        <nav id='social-nav'>
             <ul>
                 <li class="socialLinkWrapper">
                     <a class="socialLink" title="Contact Us" target="/views/contact.html" href="#">
@@ -57,7 +71,7 @@
             <h1>Privacy Notice</h1>
             <article>
                 <!-- attribution in alt text. would prefer to put it in tooltip, but don't have time -->
-                <img id='privacy-image' src="../img/all-your-data-are-belong-to-us-1.png" alt='https://www.keepcalm-o-matic.co.uk'/>
+                <img id='privacy-image' src="../img/all-your-data-are-belong-to-us-1.png" alt='https://www.keepcalm-o-matic.co.uk' />
             </article>
         </section>
     </main>
@@ -93,13 +107,12 @@
                     </li>
                 </ul>
             </div>
-            <div class='footer-column3'>
-                <div>
-                    <img id='location-map' src="../img/selection_004.gif" alt="Temp Map" />
-                </div>
-            </div>
-
     </footer>
+    <div id="locations">
+        <a name="locations"></a>
+        <img id='location-map' src="../img/map.png" alt="Temp Map">
+    </div>
+
 
     <div class='footer-copyleft'>
         <span id='copyleft-symbol'>&copy; 2018

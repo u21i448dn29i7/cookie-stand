@@ -1,0 +1,40 @@
+#shop-main {
+    margin: 0 auto;
+    width: 100%;
+}
+
+#shop-section {
+    width: 1400px;
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+#shop-section img {
+    width: 100%;
+}
+
+#shop-section article {
+    width: 400px;
+    padding: 0px;
+    margin: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+}
+
+#shop-section h2 {
+    font-family: 'Caveat', cursive;
+    font-size: 2.5em;
+}
+
+#shop-section p {
+    font-size: 1.0em;
+}
+
+#tiny-text {
+    font-size: 7px;
+}

@@ -1,0 +1,54 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    /* color: rgb(0, 0, 0); */
+    width: 100%;
+    height: 150px;
+    align-items: center;
+    /* border-bottom: 2px solid; */
+    background: linear-gradient(#c3dafd,white);
+    z-index: -1;
+}
+
+header li {
+    font-size: 1.25em;
+}
+
+
+#header-image {
+    position: absolute;
+    top: 0px;
+    height: 150px;
+    float: left;
+    z-index: 0;
+    /* opacity: 0.35; */
+}
+
+#header-text {
+    z-index: 1;
+    left: 50px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    font-family: 'Caveat', cursive;
+    /* font-size: 1.25em; */
+}
+
+#site-name {
+    font-size: 3em;
+}
+
+#social-nav {
+    font-size: 2em;
+    /* margin-left: auto; */
+}
+
+.socialLinkWrapper {
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.socialLink {
+    color: black
+}

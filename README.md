@@ -2,33 +2,37 @@
 
 ------
 
+# Assignment Overview: Lab 9
+
+&#10004; ~~Continue working on the functionality of your sales.html page if you do not have it working 100% yet, including the row of totals across the bottom.~~
+
+Here's your other tasks for today:
+
+Style up the public facing page (index.html) to make it appealing to customers. NOTE: You must use all of the images in the adjacent asset directory. Your client insists that you use Every. Single. One.
+
+&#10004; ~~chinook.png~~
+&#10004; ~~cutter.jpeg~~
+&#10004; ~~family.jpg~~
+&#10004; ~~fish.jpg~~
+&#10004; ~~frosted-cookie.jpg~~
+&#10004; ~~salmon.png~~
+&#10004; ~~shirt.jpg~~
 
 
-------
-# Assignment Overview: Lab 8
+Your public-facing index.html page should have all of the things you'd expect such a page to have for such a business: locations with addresses, hours open, contact information, and so us. Just do mockups of these things since this is not a real business, of course.
 
-Here's some of the steps you'll need to take, but not necessarily in this order:
+You can also mock up references (either links or little sections on the index.html page) for things like About Us (company history and mission), Merchandise (sales of t-shirts, mugs, stickers, etc.), links to salmon events like the Salmon Days in Issaquah, etc.
 
-&#10004; ~~Add the necessary HTML to create the input form.~~
+&#10004; ~~Apply a similar style to the sales.html page.~~
 
-&#10004; ~~Don't forget \<fieldset>!~~
+Stretch Goals (Not required! Do either one, both, or neither)
+Give your input form functionality to update the data for a location that is already in the table. This is going to require some additional pieces, such as:
 
-&#10004; ~~Use the constructor function as your guide to determine what input fields your form needs (hint: also consider what is passed in when creating instances!)~~
+Some kind of if statement to test whether the inputted cookie stand location name matches one that is already in the table (or other mechanism to indicate which location to update)
+The new input numbers need to be run through the calculation methods as with the original creation of the instances
+Make a style guide, using this one that a team Brian was on made for Everlast as a model.
 
-&#10004; ~~Your JS will need an event listener and and event handler, and also a variable to facilitate DOM access to the form.~~
+Make two additional pages:
 
-&#10004; ~~As we saw in class, the event handler should take the data from the input field, pass it into the constructor function, and create a new instance of a cookie stand that then appends to the table.~~
-
-&#10004; ~~Are you going to do any error correction on input? You probably should. Look at what kind of input validation is built in to HTML5.~~
-
-&#10004; ~~Build incrementally. Test frequently.~~
-
-&#10004; ~~Be attentive to overall code structure.~~
-
-&#10004; ~~This is a good point to refactor your code into smaller functions/methods if you have some huge functions going on. Remember that each function should do one thing, and then you can compose more complex behavior out of functions.~~
-
-&#10004; ~~Anywhere you have repeated chunks of code, maybe you can start to apply some DRY principles. Generally, once some chunk of code is appearing for a 3rd time or so, that's when you want to consider refactoring.~~
-
-&#10004; ~~When making code more DRY, look for repeated behaviors that act on different pieces of data. Put the behavior into a function that is declared with parameters to receive the unique data, and then replace the repeated code with the function called with the unique data in arguments.~~
-
-&#10004; ~~Submit your assignment through Canvas as usual.~~
+Mock up an order form that would be public facing (store.html) so that visitors to the website can order salmon cookies and swag. That form would need to receive all of the things you'd expect on an order form: name, address, payment info, products to order, quantities, special instructions, and so on.
+A second 'private' page (order-processing.html) that shows a list of pending orders and the individual order details. The business owner can then process the orders by clicking a button next to the order that then moves that list item to a 'Filled Orders' list at the bottom of the page.
