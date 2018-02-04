@@ -18,3 +18,8 @@ footer {
     margin-top: 0px;
     /* border-top: 2px solid; */
 }
+
+
+.footer-copyleft {
+    transform: rotate(180deg);
+}
