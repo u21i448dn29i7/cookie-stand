@@ -10,21 +10,34 @@
     <link rel="stylesheet" href="../css/style.css" />
 
     <!-- http://fontawesome.io/icons/#brand -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
 </head>
 
 <body>
     <header>
-        <div id='site-name'>
-            <p>
-                <a href='../index.html'>Salmon Cookies</a>
-            </p>
+        <div id="site-name">
+            <a href="../index.html" id="header-text">Salmon Cookies</a>
+            <img id="header-image" src="../img/chinook.png">
         </div>
-        <nav id='site-nav'>
+        <div id="local-nav">
+            <ul>
+                <li>
+                    <a href="shop.html">Shop</a>
+                </li>
+                <li>
+                    <a href="rd.html">What's New</a>
+                </li>
+                <li>
+                    <a href="#locations">Locations</a>
+                </li>
+            </ul>
+        </div>
+        <nav id='social-nav'>
             <ul>
                 <li class="socialLinkWrapper">
-                    <a class="socialLink" title="Contact Us" target="/contact.html" href="#">
+                    <a class="socialLink" title="Contact Us" target="_blank" href="#">
                         <i class="fa fa-envelope"></i>
                     </a>
                 </li>
@@ -54,7 +67,10 @@
     <main>
         <section id="main-content">
             <article>
-                Contact form goes here.
+                <p>All our stores are open 6AM to 8PM, 7 days a week.</p>
+                <p>Questions or comments? Give us a shout below:</p>
+                <img src="http://via.placeholder.com/960x400">
+
             </article>
         </section>
     </main>
@@ -90,12 +106,12 @@
                     </li>
                 </ul>
             </div>
-            <div class='footer-column3'>
-                <div>
-                    <img id='location-map' src="../img/selection_004.gif" alt="Temp Map" />
-                </div>
-            </div>
     </footer>
+    <div id="locations">
+        <a name="locations"></a>
+        <img id='location-map' src="../img/map.png" alt="Temp Map">
+    </div>
+
 
     <div class='footer-copyleft'>
         <span id='copyleft-symbol'>&copy; 2018

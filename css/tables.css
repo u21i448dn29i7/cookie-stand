@@ -1,0 +1,24 @@
+
+#salesForecastTable {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: rgb(163, 177, 195);
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tfoot {
+    background-color: rgb(163, 177, 195);
+}

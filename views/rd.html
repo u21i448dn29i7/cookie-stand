@@ -10,19 +10,32 @@
     <link rel="stylesheet" href="../css/style.css" />
 
     <!-- http://fontawesome.io/icons/#brand -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
 
 </head>
 
 <body>
     <header>
-        <div id='site-name'>
-            <p>
-                <a href='../index.html'>Salmon Cookies</a>
-            </p>
+        <div id="site-name">
+            <a href="../index.html" id="header-text">Salmon Cookies</a>
+            <img id="header-image" src="../img/chinook.png">
         </div>
-        <nav id='site-nav'>
+        <div id="local-nav">
+            <ul>
+                <li>
+                    <a href="shop.html">Shop</a>
+                </li>
+                <li>
+                    <a href="rd.html">What's New</a>
+                </li>
+                <li>
+                    <a href="#locations">Locations</a>
+                </li>
+            </ul>
+        </div>
+        <nav id='social-nav'>
             <ul>
                 <li class="socialLinkWrapper">
                     <a class="socialLink" title="Contact Us" target="/views/contact.html" href="#">
@@ -56,33 +69,32 @@
         <section id="main-content">
             <h1>Our latest creations!</h1>
             <article>
-                    <img class='inline-image-left' src="../img/almond-salmon-savory.jpg" />
-                    <p>Swab walk the plank gunwalls bilge water landlubber or just lubber crow's nest reef pinnace gangplank barkadeer.
-                        Squiffy stern black jack hang the jib Blimey hardtack
-                        sloop hulk crimp.
-                    </p>
-                </article>
-                <article>
-                    <img class='inline-image-right' src="../img/lox-creamcheese-puff.jpg" />
-                    <p>Fire ship yawl grog blossom lad measured fer yer chains man-of-war lass ballast yardarm handsomely. Rope's
-                        end jury Cat o'nine tails tender pirate draft.
-                    </p>
-                </article>
-                <article>
-                    <img class='inline-image-left' src="../img/savory-cannoli.jpg" />
-                    <p>Run a shot across the bow pink boatswain six pounders topmast quarter draught doubloon mizzen reef sails.
-                        Pink lee cable Blimey Port Davy Jones' Locker
-                        Barbary Coast measured fer yer chains jolly boat Sink me Gold Road killick.
-                    </p>
-                </article>
-                <article>
-                        <img class='inline-image-right' src="../img/sweet-treats.jpg" />
-                        <p>Run a shot across the bow pink boatswain six pounders topmast quarter draught doubloon mizzen reef sails.
-                            Pink lee cable Blimey Port Davy Jones' Locker
-                            Barbary Coast measured fer yer chains jolly boat Sink me Gold Road killick.
-                        </p>
-                    </article>
-                </section>
+                <img class='inline-image-left' src="../img/almond-salmon-savory.jpg" />
+                <p>Swab walk the plank gunwalls bilge water landlubber or just lubber crow's nest reef pinnace gangplank barkadeer.
+                    Squiffy stern black jack hang the jib Blimey hardtack sloop hulk crimp.
+                </p>
+            </article>
+            <article>
+                <img class='inline-image-right' src="../img/lox-creamcheese-puff.jpg" />
+                <p>Fire ship yawl grog blossom lad measured fer yer chains man-of-war lass ballast yardarm handsomely. Rope's
+                    end jury Cat o'nine tails tender pirate draft.
+                </p>
+            </article>
+            <article>
+                <img class='inline-image-left' src="../img/savory-cannoli.jpg" />
+                <p>Run a shot across the bow pink boatswain six pounders topmast quarter draught doubloon mizzen reef sails.
+                    Pink lee cable Blimey Port Davy Jones' Locker Barbary Coast measured fer yer chains jolly boat Sink me
+                    Gold Road killick.
+                </p>
+            </article>
+            <article>
+                <img class='inline-image-right' src="../img/sweet-treats.jpg" />
+                <p>Run a shot across the bow pink boatswain six pounders topmast quarter draught doubloon mizzen reef sails.
+                    Pink lee cable Blimey Port Davy Jones' Locker Barbary Coast measured fer yer chains jolly boat Sink me
+                    Gold Road killick.
+                </p>
+            </article>
+        </section>
     </main>
     <footer>
         <div class="footer-links">
@@ -116,13 +128,12 @@
                     </li>
                 </ul>
             </div>
-            <div class='footer-column3'>
-                <div>
-                    <img id='location-map' src="../img/selection_004.gif" alt="Temp Map" />
-                </div>
-            </div>
-
     </footer>
+    <div id="locations">
+        <a name="locations"></a>
+        <img id='location-map' src="../img/map.png" alt="Temp Map">
+    </div>
+
 
     <div class='footer-copyleft'>
         <span id='copyleft-symbol'>&copy; 2018
